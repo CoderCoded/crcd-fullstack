@@ -27,7 +27,6 @@ RedisModel.redisClient(redisClient)
 exports.redisClient = redisClient
 
 exports.User = require('./models/User')
-exports.Room = require('./models/Room')
 exports.AccessToken = require('./models/AccessToken')
 exports.AuthorizationCode = require('./models/AuthorizationCode')
 exports.Permission = require('./models/Permission')
