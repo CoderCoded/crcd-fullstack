@@ -1,4 +1,4 @@
-# Coder Coded Fullstack
+# Coder Coded Fullstack w/ Material Design Lite
 ---
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
@@ -8,7 +8,8 @@ WebApp boilerplate with following technologies:
 - [Riot](http://riotjs.com/) for client-side views
 - [Webpack](http://webpack.github.io/) for client-side bundles
 - [Redux](https://github.com/rackt/redux) for client-side state
-- [Pure.css](http://purecss.io/) for client-side styles
+- [Material Design Lite](http://getmdl.io/) for client-side styles
+- [Node-sass](https://github.com/sass/node-sass) for custom MDL build
 - [PostCSS](https://twitter.com/postcss) with [PreCSS](https://jonathantneal.github.io/precss/) for style transforms
 - [Nunjucks](http://mozilla.github.io/nunjucks/) for server-side rendering
 - [Express](http://expressjs.com/) for server-side app and API
@@ -105,6 +106,8 @@ server is started.
     - `components/` : Re-usable Riot components
     - `containers/` : "Smart" Riot components that are used as wrappers etc.
     - `entries/` : Entry files for webpack bundles
+    - `mdl-components` : Material Design Lite components wrapped with Riot
+    - `mdl-styles` : Material Design Lite modifications
     - `redux/` : Everything related to redux (store, middlewares and modules)
     - `routes/` : Client-side routes
     - `styles/` : Shared styles etc.
