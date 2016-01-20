@@ -1,0 +1,83 @@
+{
+  "private": true,
+  "name": "crcd-api",
+  "description": "CoderCoded Fullstack API",
+  "author": "CoderCoded",
+  "license": "MIT",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crcd/crcd-fullstack/api"
+  },
+  "homepage": "https://github.com/crcd/crcd-fullstack/api",
+  "keywords": [
+    "webpack",
+    "express",
+    "babel"
+  ],
+  "main": "build/app.js",
+  "scripts": {
+    "build-copy": "node ./node_modules/better-npm-run build-copy",
+    "build": "babel src --out-dir build --presets es2015-node4,stage-0",
+    "dev": "concurrent --kill-others \"npm run start-dev\"",
+    "start": "concurrent --kill-others \"npm run start-prod\"",
+    "start-prod": "node ./node_modules/better-npm-run start-prod",
+    "start-dev": "node ./node_modules/better-npm-run start-dev | ./node_modules/bunyan/bin/bunyan"
+  },
+  "betterScripts": {
+    "build-copy": {
+      "command": "node babel-hook.js",
+      "env": {
+        "NODE_ENV": "production",
+        "BABEL_SOURCE": "./build-copy"
+      }
+    },
+    "start-prod": {
+      "command": "node build/app.js",
+      "env": {
+        "NODE_CONFIG_DIR": "./build/config",
+        "NODE_ENV": "production",
+        "PORT": 8081
+      }
+    },
+    "start-dev": {
+      "command": "node babel-hook.js",
+      "env": {
+        "NODE_CONFIG_DIR": "./src/config",
+        "NODE_ENV": "development",
+        "PORT": 3031,
+        "BABEL_SOURCE": "./src/app"
+      }
+    }
+  },
+  "dependencies": {
+    "babel-cli": "^6.3.17",
+    "babel-core": "^6.3.15",
+    "babel-eslint": "^5.0.0-beta6",
+    "babel-plugin-typecheck": "^3.6.0",
+    "babel-polyfill": "^6.3.14",
+    "babel-preset-es2015-node4": "^2.0.2",
+    "babel-preset-stage-0": "^6.3.13",
+    "babel-register": "^6.3.13",
+    "babel-runtime": "^6.3.13",
+    "better-npm-run": "^0.0.5",
+    "bunyan": "^1.5.1",
+    "crcd-db": "file:../db",
+    "pretty-error": "^2.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=0.10.32"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "__DEVELOPMENT__",
+      "APPNAME",
+      "CONFIG",
+      "log"
+    ]
+  }
+}

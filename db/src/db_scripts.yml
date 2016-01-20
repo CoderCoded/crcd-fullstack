@@ -1,0 +1,57 @@
+
+#
+# Lua scripts
+#
+# This file contains lua scripts for Redis database to help
+# some common tasks that include multiple commands that
+# depend on each other's results
+#
+# The scripts are loaded and cached using redisCliet.load(scriptname, scriptbody)
+# and called using redisClient.evalCached([scriptname, params])
+#
+
+saveToken: |
+  local token = KEYS[1]
+  local user_tokens = KEYS[2]
+
+  redis.call("hmset", token, unpack(ARGV))
+  redis.call("sadd", user_tokens, token)
+
+  return {token}
+
+
+removeToken: |
+  local token = KEYS[1]
+
+  redis.log(redis.LOG_NOTICE, "Trying to find user_id for " .. token)
+  local user_id = redis.call("hget", token, "user_id")
+
+  if not user_id then
+    redis.log(redis.LOG_NOTICE, "Token has already been removed!")
+    return
+  end
+
+  redis.log(redis.LOG_NOTICE, "Found " .. user_id)
+  redis.log(redis.LOG_NOTICE, "Removing " .. token)
+
+  redis.call("srem", "{user:" .. user_id .. "}:tokens", token)
+  redis.call("del", token)
+  return {token}
+
+# Set hash with expiry but only update ttl if the existing ttl
+# was greater than the new ttl
+cachePermission: |
+  local key = KEYS[1]
+  local field = ARGV[1]
+  local value = ARGV[2]
+  local new_ttl = tonumber(ARGV[3])
+
+  local ttl_now = redis.call("ttl", key)
+
+  redis.call("hset", key, field, value)
+
+  if ttl_now < 0 or ttl_now > new_ttl then
+    redis.call("expire", key, new_ttl)
+  end
+
+  return 1

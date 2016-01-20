@@ -1,0 +1,23 @@
+db:
+  postgres:
+    host: 'localhost'
+    port: 5432
+    password: 'pass'
+    database: 'db'
+    user: 'user'
+
+  redis:
+    host: 'localhost'
+    port: 6379
+    cluster:
+      enable: false
+      nodes:
+        - host: 'localhost'
+          port: 300001
+        - host: 'localhost'
+          port: 300002
+      options:
+        enableOfflineQueue: false
+
+auth:
+  enabled: true

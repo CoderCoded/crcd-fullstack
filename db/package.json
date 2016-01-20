@@ -1,0 +1,67 @@
+{
+  "private": true,
+  "name": "crcd-db",
+  "description": "CoderCoded Fullstack Database",
+  "author": "CoderCoded",
+  "license": "MIT",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crcd/crcd-fullstack/db"
+  },
+  "homepage": "https://github.com/crcd/crcd-fullstack/db",
+  "keywords": [
+    "babel",
+    "postgre",
+    "redis"
+  ],
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "babel src --out-dir lib --presets es2015-node4,stage-0; cp src/*.yml lib/",
+    "test": "echo \"No test runner defined yet.\""
+  },
+  "dependencies": {
+    "babel-generator": "^6.4.3",
+    "babel-polyfill": "^6.3.14",
+    "babel-register": "^6.4.3",
+    "babel-runtime": "^6.3.13",
+    "bcrypt": "^0.8.5",
+    "bluebird": "^3.1.1",
+    "bunyan": "^1.5.1",
+    "cache-manager": "^1.1.0",
+    "config": "^1.19.0",
+    "connect-ensure-login": "^0.1.1",
+    "debug": "^2.2.0",
+    "ioredis": "^1.9.0",
+    "joi": "^7.2.1",
+    "js-yaml": "^3.5.2",
+    "knex": "^0.9.0",
+    "oauth2orize": "^1.2.0",
+    "objection": "^0.4.0-rc.3",
+    "passport": "^0.3.2",
+    "passport-http": "^0.3.0",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
+    "passport-oauth2-client-password": "^0.1.2",
+    "pg": "^4.4.2",
+    "uid-safe": "^2.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.3.17",
+    "babel-core": "^6.3.15",
+    "babel-eslint": "^5.0.0-beta6",
+    "babel-preset-es2015-node4": "^2.0.2",
+    "babel-preset-stage-0": "^6.3.13",
+    "better-npm-run": "^0.0.5"
+  },
+  "engines": {
+    "node": ">=0.10.32"
+  },
+  "standard": {
+    "global": [
+      "__DEVELOPMENT__",
+      "logdb"
+    ],
+    "parser": "babel-eslint"
+  }
+}

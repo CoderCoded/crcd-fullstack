@@ -1,0 +1,7 @@
+node_modules/
+server/static/dist/
+server/static/**/*.html
+build/
+.tmp/
+webpack-stats.json
+npm-debug.log

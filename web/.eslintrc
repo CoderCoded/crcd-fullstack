@@ -1,0 +1,14 @@
+{
+  "extends": "standard",
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "emcaFeatures": {
+    "modules": true
+  }
+  "plugins": [
+    "riot"
+  ]
+}
