@@ -39,6 +39,9 @@ module.exports = {
         exclude: path.join(__dirname, 'node_modules'),
         loaders: ['babel']
       }, {
+        test: require.resolve('material-design-lite/material'),
+        loader: 'exports?componentHandler'
+      }, {
         test: /\.html$/,
         exclude: path.join(__dirname, 'node_modules'),
         loader: 'html'
@@ -49,6 +52,9 @@ module.exports = {
       }, {
         test: /\.css$/,
         loader: 'style!css!postcss'
+      }, {
+        test: /\.scss$/,
+        loader: 'style!css!postcss!sass'
       }, {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'url?limit=10000?hash=sha512&digest=hex&name=[hash].[ext]'
@@ -74,7 +80,7 @@ module.exports = {
     new webpack.IgnorePlugin(/\.json$/),
     new webpack.DefinePlugin({
       __DEVELOPMENT__: true,
-      __DEVTOOLS__: true
+      __DEVTOOLS__: false
     }),
     new webpack.optimize.CommonsChunkPlugin('commons', 'commons.js')
 

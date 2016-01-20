@@ -31,6 +31,9 @@ module.exports = {
         exclude: /node_modules/,
         loaders: [strip.loader('debug'), 'babel']
       }, {
+        test: require.resolve('material-design-lite/material'),
+        loader: 'exports?componentHandler'
+      }, {
         test: /\.json$/,
         loader: 'json-loader'
       }, {
@@ -40,6 +43,9 @@ module.exports = {
       }, {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style', 'css!postcss')
+      }, {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
       }, {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'url?limit=10000?hash=sha512&digest=hex&name=[hash].[ext]'

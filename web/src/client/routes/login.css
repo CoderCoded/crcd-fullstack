@@ -1,44 +1,8 @@
-@import '../styles/variables.css';
-@import '../styles/colors.css';
-
-html, body {
-  height: 100%;
+.mdl-layout {
+  align-items: center;
+  justify-content: center;
 }
-
-body {
-  font-family: $font-family-base;
-}
-
-#app {
-
-
-  h1 {
-    color: $gray-darker;
-  }
-
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  height: 100%;
-
-}
-
-#login-form {
-
-  margin: 0;
-  padding: 50px 2em 0;
-  line-height: 1.6em;
-
-  background-color: $gray-lighter;
-  width: 100%;
-  height: auto;
-
-  position: relative;
-  transition: all 0.25s;
-
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-
+.mdl-layout__content {
+  padding: 24px;
+  flex: none;
 }

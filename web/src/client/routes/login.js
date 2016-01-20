@@ -1,6 +1,7 @@
+import componentHandler from 'material-design-lite/material'
+
 import { login } from '../redux/modules/auth'
 
-import route from 'riot-route'
 import './login.css'
 import tagHtml from './login.html'
 
@@ -14,7 +15,9 @@ riot.tag('login', tagHtml, function (opts) {
     let { user, redirectTo } = this.state
 
     if (user) {
-      route(redirectTo || '/')
+      // route(redirectTo || '/')
+      // Temp fix for MDL layout
+      window.location.assign(redirectTo || '/')
       return
     }
 
@@ -23,6 +26,7 @@ riot.tag('login', tagHtml, function (opts) {
 
   this.on('mount', () => {
     this.log.debug('Mounted: <login>')
+    componentHandler.upgradeDom()
     this.store.resetReducers()
   })
 

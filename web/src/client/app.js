@@ -1,3 +1,5 @@
+import 'mdl-styles/material-design-lite.scss'
+
 import 'babel-polyfill'
 import createStore from './redux/createStore'
 import riot from 'riot'

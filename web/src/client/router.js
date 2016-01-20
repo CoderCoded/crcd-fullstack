@@ -76,10 +76,10 @@ appRouter('/roles..', () => {
 appRouter('/', () => {
   route.log.debug('Route /')
   require.ensure([], async () => {
-    require('./routes/main')
+    require('./routes/dashboard')
     await mountApp()
-    route.log.debug('Mounting: <main>')
-    riot.mount(contentMountPoint, 'main')
+    route.log.debug('Mounting: <dashboard>')
+    riot.mount(contentMountPoint, 'dashboard')
   })
 })
 

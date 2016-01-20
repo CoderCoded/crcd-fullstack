@@ -1,6 +1,9 @@
-import '../components/nav-link'
-import './navigation.css'
+import '../mdl-components/mdl-nav-link'
 import tagHtml from './navigation.html'
 
-riot.tag('navigation', tagHtml, function (opts) {
+const tagAttrs = `class="${APP_NAME}-navigation mdl-navigation"`
+
+riot.tag('navigation', tagHtml, tagAttrs, function (opts) {
+  this.on('mount', () => {
+  })
 })

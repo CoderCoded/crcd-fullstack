@@ -1,0 +1,32 @@
+// Our custom color palette
+
+$palette-crcd-green:
+"0,255,0"
+"0,219,0"
+"0,201,0"
+"0,184,0"
+"0,166,0"
+"0,148,0"
+"0,130,0"
+"0,112,0"
+"0,94,0"
+"0,77,0"
+"0,59,0"
+"0,41,0"
+"0,23,0"
+"0,5,0";
+
+$palette-crcd-green-50: nth($palette-crcd-green, 1);
+$palette-crcd-green-100: nth($palette-crcd-green, 2);
+$palette-crcd-green-200: nth($palette-crcd-green, 3);
+$palette-crcd-green-300: nth($palette-crcd-green, 4);
+$palette-crcd-green-400: nth($palette-crcd-green, 5);
+$palette-crcd-green-500: nth($palette-crcd-green, 6);
+$palette-crcd-green-600: nth($palette-crcd-green, 7);
+$palette-crcd-green-700: nth($palette-crcd-green, 8);
+$palette-crcd-green-800: nth($palette-crcd-green, 9);
+$palette-crcd-green-900: nth($palette-crcd-green, 10);
+$palette-crcd-green-A100: nth($palette-crcd-green, 11);
+$palette-crcd-green-A200: nth($palette-crcd-green, 12);
+$palette-crcd-green-A400: nth($palette-crcd-green, 13);
+$palette-crcd-green-A700: nth($palette-crcd-green, 14);
