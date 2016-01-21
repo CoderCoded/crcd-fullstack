@@ -14,9 +14,13 @@
  * limitations under the License.
  */
 
-/* =======  CUSTOM VARIABLES ======= */
+/* ========= CUSTOM FONTS ========= */
 
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300);
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,700,500,400italic,300italic,300,500italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700,300);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+/* ======= CUSTOM VARIABLES ======= */
 
 $app: "crcd";
 
@@ -61,8 +65,8 @@ $app: "crcd";
    We should be able to improve on this once CSS Font Loading L3 becomes more
    widely available.
 */
-$preferred_font: 'Source Sans Pro', 'Helvetica', 'Arial', sans-serif !default;
-$performance_font: 'Helvetica', 'Arial', sans-serif !default;
+$preferred_font: 'Titillium Web', 'Helvetica', 'Arial', sans-serif !default;
+$performance_font: 'Fira Sans', 'Arial', sans-serif !default;
 
 /* ==========  COLORS  ========== */
 
