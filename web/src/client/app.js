@@ -68,7 +68,7 @@ const updateLogLevel = () => {
 
 const updateTitle = () => {
   let title = store.getState().app.title
-  document.title = 'GoA - ' + t(title + '.title')
+  document.title = 'Coder Coded - ' + t(title + '.title')
 }
 
 moment.locale('en', {
