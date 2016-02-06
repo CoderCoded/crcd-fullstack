@@ -1,0 +1,75 @@
+<mdl-select
+  reset-on-update="true"
+  class-ext="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--3-col-desktop"
+  select-id="select-field-{ state.id }"
+  select-name="select-field-{ state.id }"
+  options="{ fields }"
+  onchange="{ onFieldSelect }"
+  selected-item="{ state.fieldSelected }">
+    <yield to="label">{ t('filter.filter') }</yield>
+</mdl-select>
+
+<mdl-select
+  reset-on-update="true"
+  each="{ hasComparatorSelect() ? [1] : [] }"
+  class-ext="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--3-col-desktop"
+  select-id="select-comparator-{ state.id }"
+  select-name="select-comparator-{ state.id }"
+  options="{ comparators }"
+  onchange="{ onComparatorSelect }"
+  selected-item="{ state.comparator }">
+    <yield to="label">{ t('filter.comparator') }</yield>
+</mdl-select>
+
+<mdl-select
+  reset-on-update="true"
+  each="{ hasDateComparatorSelect() ? [1] : [] }"
+  class-ext="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--3-col-desktop"
+  select-id="select-date-comparator-{ state.id }"
+  select-name="select-date-comparator-{ state.id }"
+  options="{ dateComparators }"
+  onchange="{ onDateComparatorSelect }"
+  selected-item="{ state.dateComparator }">
+    <yield to="label">{ t('filter.comparator') }</yield>
+</mdl-select>
+
+<mdl-textfield
+  each="{ hasSearch() ? [1] : [] }"
+  class-ext="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--3-col-desktop"
+  floating-label="true"
+  input-id="input-search-{ state.id }"
+  input-name="input-search-{ state.id }"
+  input-value="{ state.query }"
+  onchange="{ onSearch }">
+    <yield to="label">{ t('filter.search') }</yield>
+</mdl-textfield>
+
+<mdl-textfield
+  each="{ hasValueInput() ? [1] : [] }"
+  class-ext="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--3-col-desktop"
+  floating-label="true"
+  input-id="input-value-{ state.id }"
+  input-name="input-value-{ state.id }"
+  input-value="{ state.value }"
+  onchange="{ onValueChange }"
+  numeric="true">
+    <yield to="label">{ t('filter.value') }</yield>
+    <yield to="errorMessage">{ t('textfield.errors.numeric') }</yield>
+</mdl-textfield>
+
+<pikaday
+  each="{ hasDateInput() ? [1] : [] }"
+  onchange="{ onDateChange }">
+  <mdl-textfield
+    class-ext="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--3-col-desktop"
+    floating-label="true"
+    input-id="date-{ state.id }"
+    input-name="date-{ state.id }"
+    input-value="{ state.date.format('L') }">
+      <yield to="label">{ t('filter.date') }</yield>
+  </mdl-textfield>
+</pikaday>
+
+<span if="{ state.fieldSelected }">
+  <mdl-button icon="close" onclick="{ close }"></mdl-button>
+</span>

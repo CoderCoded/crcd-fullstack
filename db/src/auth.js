@@ -8,28 +8,30 @@ var LocalStrategy = require('passport-local').Strategy
 var BasicStrategy = require('passport-http').BasicStrategy
 var ClientPasswordStrategy = require('passport-oauth2-client-password').Strategy
 var BearerStrategy = require('passport-http-bearer').Strategy
-// var User = require('./db/models/users')
-// var AccessToken = require('./db/models/accesstokens')
+var User = require('./models/User')
 var bcrypt = require('bcrypt')
 // var uid = require('uid-safe').sync
 
 // var util = require('util')
 
-var User = require('./models/User')
 var AccessToken = require('./models/AccessToken')
 var Client = require('./models/Client')
 
-// console.warn(User)
+const logauth = logdb.child({'module': 'auth'})
 
 const DEMO_USER = {
   id: 1,
-  username: 'demouser'
+  username: 'CrcdDemo',
+  password: 'CrcdDemo'
 }
 
-passport.log = logdb.child({module: 'passport'})
+exports.enableLocalAuth = async function () {
+  logauth.debug('Enabling local auth.')
 
-exports.enableLocalAuth = function () {
-  passport.log.debug('Enabling local auth.')
+  // Just for demo use
+  let hash = await User.genHash(DEMO_USER.password)
+  DEMO_USER.password = hash
+
   /**
    * LocalStrategy
    *
@@ -40,39 +42,44 @@ exports.enableLocalAuth = function () {
   // passport.use(new LocalStrategy(async function (username, password, done) {
   passport.use(new LocalStrategy(function (username, password, done) {
     // Temp dev mode
-    passport.log.debug('LocalStrategy', username, password)
-    done(null, DEMO_USER)
+    logauth.debug('Logging in', {strategy: 'LocalStrategy', username, password})
 
-    // try {
-    //   // Returning false in passport callback invalidates session
-    //   let user = await User.findByUsername(username)
+    try {
+      // Returning false in passport callback invalidates session
+      // let user = await User.findByUsername(username)
+      let user = DEMO_USER
 
-    //   if (!user) return done(null, false)
+      logauth.debug('Fake user found', user)
 
-    //   if (!bcrypt.compareSync(password, user.password)) return done(null, false)
+      if (!user) return done(null, false)
 
-    //   console.log('Local strategy successful!')
+      // This is for demo user only
+      if (username !== user.username) return done(null, false)
 
-    //   done(null, user)
-    // } catch (e) {
-    //   done(e)
-    // }
+      if (!bcrypt.compareSync(password, user.password)) return done(null, false)
+
+      logauth.debug('Login successful', {strategy: 'LocalStrategy', username})
+
+      done(null, user)
+    } catch (e) {
+      done(e)
+    }
   }))
 }
 
 passport.serializeUser(function (user, done) {
-  passport.log.debug('Serializing', { user })
+  logauth.debug('Serializing', { user })
   done(null, user.id)
 })
 
 passport.deserializeUser(async function (id, done) {
-  passport.log.debug('Deserializing', { id })
+  logauth.debug('Deserializing', { id })
   done(null, DEMO_USER)
   // try {
   //   // returning false invalidates the session
   //   let user = await User.findById(id) || false
 
-  //   passport.log.debug('Found %s', util.inspect(user))
+  //   logauth.debug('Found %s', util.inspect(user))
 
   //   done(null, user)
   // } catch (e) {
@@ -98,9 +105,9 @@ exports.enableBasicAndClientAuth = function () {
         if (err) { return done(err) }
         if (!client) { return done(null, false) }
         if (!bcrypt.compareSync(password, client.clientSecret)) {
-          passport.log.debug('Basic strategy - password does not match!')
-          passport.log.debug(password)
-          passport.log.debug(client.clientSecret)
+          logauth.debug('Basic strategy - password does not match!')
+          logauth.debug(password)
+          logauth.debug(client.clientSecret)
           return done(null, false)
         }
         return done(null, client)
@@ -114,9 +121,9 @@ exports.enableBasicAndClientAuth = function () {
         if (err) { return done(err) }
         if (!client) { return done(null, false) }
         if (!bcrypt.compareSync(clientSecret, client.clientSecret)) {
-          passport.log.debug('Client secret strategy - secret does not match!')
-          passport.log.debug(clientSecret)
-          passport.log.debug(client.clientSecret)
+          logauth.debug('Client secret strategy - secret does not match!')
+          logauth.debug(clientSecret)
+          logauth.debug(client.clientSecret)
           return done(null, false)
         }
         return done(null, client)

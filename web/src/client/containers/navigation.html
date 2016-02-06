@@ -1,7 +1,6 @@
-<a href="/" riot-tag="mdl-nav-link" icon="home">Home</a>
-<a href="/roles" riot-tag="mdl-nav-link" icon="person">Roles</a>
-<a href="/objects" riot-tag="mdl-nav-link" icon="cloud_circle">Objects</a>
-<a href="/not-found" riot-tag="mdl-nav-link" icon="block">404</a>
-<a href="/logout" riot-tag="mdl-nav-link" icon="exit_to_app">Logout</a>
+<a href="/" riot-tag="mdl-nav-link" is-current="{ isCurrent('') }" icon="home">{ t('home.title') }</a>
+
+<!-- airports, pilots, legs, nutrition, schedules -->
+<a href="/nutrition" riot-tag="mdl-nav-link" is-current="{ isCurrent('nutrition') }" icon="restaurant_menu">{ t('nutrition.title') }</a>
 <div class="mdl-layout-spacer"></div>
 <a href="" riot-tag="mdl-nav-link" icon="help_outline"><span class="visuallyhidden">Help</span></a>

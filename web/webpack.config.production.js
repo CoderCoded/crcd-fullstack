@@ -14,9 +14,7 @@ module.exports = {
   devtool: 'source-map',
   entry: {
     'login': './src/client/entries/login.js',
-    'main': './src/client/entries/main.js',
-    'objects': './src/client/entries/objects.js',
-    'roles': './src/client/entries/roles.js'
+    'main': './src/client/entries/main.js'
   },
   output: {
     path: outputPath,
@@ -31,7 +29,7 @@ module.exports = {
         exclude: /node_modules/,
         loaders: [strip.loader('debug'), 'babel']
       }, {
-        test: require.resolve('material-design-lite/material'),
+        test: require.resolve('./src/client/mdl-custom/material'),
         loader: 'exports?componentHandler'
       }, {
         test: /\.json$/,
@@ -47,8 +45,14 @@ module.exports = {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
       }, {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif)$/i,
         loader: 'url?limit=10000?hash=sha512&digest=hex&name=[hash].[ext]'
+      }, {
+        test: /\.woff(2)?(\?.*)?$/,
+        loader: 'url-loader?limit=10000&minetype=application/font-woff'
+      }, {
+        test: /\.(ttf|eot|svg)(\?.*)?$/,
+        loader: 'file-loader'
       }
     ]
   },
@@ -58,7 +62,11 @@ module.exports = {
       'src/client',
       'node_modules'
     ],
-    extensions: ['', '.json', '.js']
+    extensions: ['', '.json', '.js'],
+    alias: {
+      'i18next': 'i18next/lib/index.js',
+      'i18next-xhr-backend': 'i18next-xhr-backend/lib/index.js'
+    }
   },
   plugins: [
 

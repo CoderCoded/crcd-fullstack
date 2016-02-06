@@ -1,0 +1,3 @@
+<input class="mdl-textfield__input" type="{ opts.numeric ? 'number' : 'text'}" value="{ opts.inputValue }" pattern="{ pattern }" id="{ opts.inputId }" onchange="{ onChange }">
+<label class="mdl-textfield__label" for="{ opts.inputId }"><yield from="label"></yield></label>
+<span class="mdl-textfield__error"><yield from="errorMessage"></yield></span>

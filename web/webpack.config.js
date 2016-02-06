@@ -6,7 +6,7 @@ var port = parseInt(process.env.PORT, 10) || 3001
 
 module.exports = {
   target: 'web',
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-eval-source-map',
   entry: {
     'login': [
       'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
@@ -15,14 +15,6 @@ module.exports = {
     'main': [
       'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
       './src/client/entries/main.js'
-    ],
-    'objects': [
-      'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
-      './src/client/entries/objects.js'
-    ],
-    'roles': [
-      'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
-      './src/client/entries/roles.js'
     ]
   },
   debug: true,
@@ -39,7 +31,7 @@ module.exports = {
         exclude: path.join(__dirname, 'node_modules'),
         loaders: ['babel']
       }, {
-        test: require.resolve('material-design-lite/material'),
+        test: require.resolve('./src/client/mdl-custom/material'),
         loader: 'exports?componentHandler'
       }, {
         test: /\.html$/,
@@ -56,8 +48,14 @@ module.exports = {
         test: /\.scss$/,
         loader: 'style!css!postcss!sass'
       }, {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif)$/i,
         loader: 'url?limit=10000?hash=sha512&digest=hex&name=[hash].[ext]'
+      }, {
+        test: /\.woff(2)?(\?.*)?$/,
+        loader: 'url-loader?limit=10000&minetype=application/font-woff'
+      }, {
+        test: /\.(ttf|eot|svg)(\?.*)?$/,
+        loader: 'file-loader'
       }
     ]
   },
@@ -67,7 +65,11 @@ module.exports = {
       'src/client',
       'node_modules'
     ],
-    extensions: ['', '.json', '.js']
+    extensions: ['', '.json', '.js'],
+    alias: {
+      'i18next': 'i18next/lib/index.js',
+      'i18next-xhr-backend': 'i18next-xhr-backend/lib/index.js'
+    }
   },
   plugins: [
 
@@ -80,7 +82,7 @@ module.exports = {
     new webpack.IgnorePlugin(/\.json$/),
     new webpack.DefinePlugin({
       __DEVELOPMENT__: true,
-      __DEVTOOLS__: false
+      __DEVTOOLS__: true
     }),
     new webpack.optimize.CommonsChunkPlugin('commons', 'commons.js')
 

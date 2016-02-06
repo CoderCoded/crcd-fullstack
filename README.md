@@ -107,7 +107,7 @@ server is started.
     - `containers/` : "Smart" Riot components that are used as wrappers etc.
     - `entries/` : Entry files for webpack bundles
     - `mdl-components` : Material Design Lite components wrapped with Riot
-    - `mdl-styles` : Material Design Lite modifications
+    - `mdl-custom` : Material Design Lite modifications
     - `redux/` : Everything related to redux (store, middlewares and modules)
     - `routes/` : Client-side routes
     - `styles/` : Shared styles etc.

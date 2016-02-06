@@ -5,10 +5,6 @@ riot.tag('roles', tagHtml, function (opts) {
   this.log = log.child({childName: 'route/roles'})
   this.mixin('store')
 
-  this.on('update', () => {
-    // console.log('roles state updated')
-  })
-
   this.on('mount', () => {
     this.log.debug('Mounted: <roles>')
     this.store.registerReducers({ roles }, true)

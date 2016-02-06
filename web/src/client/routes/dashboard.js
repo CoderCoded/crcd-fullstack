@@ -1,5 +1,5 @@
+import componentHandler from 'mdl-custom/material'
 import tagHtml from './dashboard.html'
-import componentHandler from 'material-design-lite/material'
 
 riot.tag('dashboard', tagHtml, function (opts) {
   this.log = log.child({childName: 'route/dashboard'})

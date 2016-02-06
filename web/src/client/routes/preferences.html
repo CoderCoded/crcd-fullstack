@@ -1,0 +1,28 @@
+<div class="crcd-preferences mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+
+    <ul class="crcd-preferences__list-control mdl-list">
+
+      <li class="mdl-list__item">
+
+        <mdl-select select-id="select-lang" select-name="select-lang" options="{ langOptions }" onchange="{ onLangSelect }" selected-item="{ selectedLang }">
+          <yield to="label">{ t('preferences.lng') }</yield>
+        </mdl-select>
+
+      </li>
+
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          Debug mode
+        </span>
+        <span class="mdl-list__item-secondary-action">
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-debug">
+            <input type="checkbox" id="switch-debug" class="mdl-switch__input" checked="{ state.debug }" onchange="{ onDebugChange }"/>
+          </label>
+        </span>
+      </li>
+    </ul>
+
+
+  </div>
+</div>

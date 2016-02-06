@@ -25,7 +25,6 @@ const LOGOUT_FAIL = 'crcd-web/auth/LOGOUT_FAIL'
  */
 
 export function fetchData () {
-  // console.log('ACTION: ', GET)
   return {
     [CALL_API]: {
       types: [GET, GET_SUCCESS, GET_FAIL],
@@ -70,23 +69,31 @@ export function logout () {
  * ------
  */
 
-export default function reducer (state = {}, action) {
+export default function reducer (state = {
+  ...window.__data.auth,
+  loginSent: false,
+  loginFailed: false
+}, action) {
   switch (action.type) {
     case GET:
-      // console.log('User get sent')
+      authlog.debug('User get sent')
       return state
     case GET_SUCCESS:
-      // console.log('User get successful', action.meta)
+      authlog.debug('User get successful', action.payload)
       return {
         ...state,
         user: action.payload.data.user
       }
     case GET_FAIL:
-      // console.log('User get failed', action.meta)
+      authlog.debug('User get failed', action.payload)
       return state
     case LOGIN:
-      // console.log('Login sent')
-      return state
+      authlog.debug('Login sent')
+      return {
+        ...state,
+        loginSent: true,
+        loginFailed: false
+      }
     case LOGIN_SUCCESS:
       let { redirectTo, user } = action.payload.data
       authlog.info('Login successful, user:', user.username)
@@ -94,11 +101,16 @@ export default function reducer (state = {}, action) {
       return {
         ...state,
         user,
-        redirectTo
+        redirectTo,
+        loginSent: false
       }
     case LOGIN_FAIL:
-      authlog.error('Login failed.', action.meta)
-      return state
+      authlog.error('Login failed.', action.payload)
+      return {
+        ...state,
+        loginFailed: true,
+        loginSent: false
+      }
     case LOGOUT:
       authlog.debug('Logout sent.')
       return state
@@ -110,7 +122,7 @@ export default function reducer (state = {}, action) {
         redirectTo: '/login'
       }
     case LOGOUT_FAIL:
-      authlog.error('Logout failed.', action.meta)
+      authlog.error('Logout failed.', action.payload)
       return state
     default:
       return state

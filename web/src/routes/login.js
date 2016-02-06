@@ -6,6 +6,16 @@ import nonXHR from '../utils/nonXHR'
 
 router.get('/', function (req, res) {
   let { data } = res
+  if (!data) data = {}
+  if (!data.app) data.app = {}
+  data = {
+    ...data,
+    app: {
+      ...data.app,
+      path: 'login',
+      title: 'login'
+    }
+  }
   if (req.xhr) return res.json({ data })
   res.render('login.html', { data })
 })

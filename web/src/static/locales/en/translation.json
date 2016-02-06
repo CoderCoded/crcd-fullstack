@@ -1,0 +1,65 @@
+{
+  "home": {
+    "title": "Home"
+  },
+  "preferences": {
+    "title": "Preferences",
+    "lng": "Language"
+  },
+  "login": {
+    "title": "Web App",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Log in",
+    "forgot": "Forgot password?",
+    "errors": {
+      "username": {
+        "empty": "Username can't be empty.",
+        "invalid": "Invalid username or password."
+      },
+      "password": {
+        "empty": "Password can't be empty.",
+        "invalid": "Invalid username or password."
+      }
+    }
+  },
+  "logout": {
+    "title": "Logout"
+  },
+  "nutrition": {
+    "title": "Nutrition"
+  },
+  "notFound": {
+    "title": "Not found"
+  },
+  "filter": {
+    "filter": "Filter",
+    "value": "Value",
+    "search": "Search",
+    "comparator": "Compare",
+    "date": "Date",
+    "numberComparator": {
+      "lt": "Less than",
+      "gt": "Greater than",
+      "eq": "Equals"
+    },
+    "dateComparator": {
+      "before": "Before",
+      "after": "After",
+      "at": "At"
+    }
+  },
+  "textfield": {
+    "errors": {
+      "numeric": "Value must be numeric."
+    }
+  },
+  "dataTable": {
+    "row": "row",
+    "rows": "rows",
+    "selected": "selected",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete"
+  }
+}

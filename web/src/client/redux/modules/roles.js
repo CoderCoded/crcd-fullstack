@@ -16,7 +16,6 @@ const GET_FAIL = 'crcd-web/roles/GET_FAIL'
  */
 
 export function fetchData () {
-  // console.log('ACTION: ', GET)
   return {
     [CALL_API]: {
       types: [GET, GET_SUCCESS, GET_FAIL],
@@ -28,7 +27,6 @@ export function fetchData () {
 
 export function fetchDataIfNeeded () {
   return function (dispatch, getState) {
-    // TODO: Check here if we alread have the data
     return dispatch(fetchData())
   }
 }

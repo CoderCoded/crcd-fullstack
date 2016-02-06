@@ -1,0 +1,42 @@
+@import '../mdl-custom/variables';
+
+
+.crcd-login {
+  &.mdl-layout {
+    align-items: center;
+    justify-content: center;
+  }
+  .mdl-layout__content {
+    padding: 24px;
+    flex: none;
+  }
+  .crcd-logo {
+    background-image: url('/images/crcd_logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 80px;
+    min-height: 80px;
+    margin-bottom: 40px;
+  }
+
+  #langbtn {
+    position: absolute;
+    right: 16px;
+  }
+
+  // This is a hidden extension to layout so tooltip won't be hidden
+  .layout-expand {
+    display: flex;
+    height: 32px;
+  }
+
+  .mdl-menu__item--current {
+    background-color: $layout-drawer-navigation-link-active-background !important;
+    color: $layout-drawer-navigation-link-active-color;
+  }
+
+  .right {
+    float: right;
+  }
+
+}

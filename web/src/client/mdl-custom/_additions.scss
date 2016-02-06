@@ -1,0 +1,36 @@
+@import "./variables";
+
+.mdl-layout__content {
+  // width: 100%;
+  // height: 100%;
+  // display: flex;
+  // flex-direction: column;
+  // overflow-y: auto;
+  overflow-x: auto !important;
+  // position: relative;
+  // -webkit-overflow-scrolling: touch;
+}
+
+.mdl-menu__item {
+
+  // Fix icon
+  .material-icons {
+    margin-right: 16px;
+  }
+
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mdl-button {
+  font-weight: $button-text-font-weight;
+  &.mdl-button--colored {
+    // Special rule for colored non-raised buttons
+    font-weight: $button-text-font-weight-colored;
+  }
+  &.mdl-button--raised {
+    font-weight: $button-text-font-weight;
+  }
+}

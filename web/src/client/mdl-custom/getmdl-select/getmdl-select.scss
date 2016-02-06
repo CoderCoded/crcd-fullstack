@@ -1,0 +1,24 @@
+@import "../variables";
+
+.getmdl-select {
+  .mdl-icon-toggle__label {
+    float:right;
+    margin-top:-30px;
+    color: $input-text-label-color;
+  }
+
+  &.is-focused{
+    .mdl-icon-toggle__label{
+      color: $input-text-highlight-color;
+    }
+  }
+
+  .mdl-menu__container {
+    margin-top: 4px;
+    width: 100% !important;
+
+    .mdl-menu {
+      width: 100%;
+    }
+  }
+}

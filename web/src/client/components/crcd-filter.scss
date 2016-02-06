@@ -1,0 +1,25 @@
+@import "../mdl-custom/variables";
+
+.crcd-filter {
+
+  // Fix icon
+  .getmdl-select {
+    // width: 47%;
+    // margin-right: 16px;
+    // &:last-child {
+    //   margin-right: 0;
+    // }
+  }
+
+  .mdl-cell {
+    margin: 0;
+    margin-right: 16px;
+    // padding-top: 10px;
+    // padding-bottom: 10px;
+  }
+
+  .material-icons {
+    color: $input-text-label-color;
+  }
+
+}

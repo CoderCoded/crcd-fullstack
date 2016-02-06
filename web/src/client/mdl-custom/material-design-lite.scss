@@ -1,13 +1,10 @@
 // Customized Material Design Lite
 
 // Custom variables
-@import "variables";
-
-
-
+@import "./variables";
 
 // Variables and mixins
-@import "~material-design-lite/src/variables";
+// @import "~material-design-lite/src/variables";
 @import "~material-design-lite/src/mixins";
 
 // Resets and dependencies
@@ -25,15 +22,18 @@
 @import "~material-design-lite/src/button/button";
 @import "~material-design-lite/src/card/card";
 @import "./checkbox/checkbox"; // Needed to remove '?embed'
-@import "~material-design-lite/src/data-table/data-table";
+@import "./data-table/data-table"; // Customized
+@import "~material-design-lite/src/dialog/dialog";
 @import "~material-design-lite/src/footer/mega_footer";
 @import "~material-design-lite/src/footer/mini_footer";
 @import "~material-design-lite/src/icon-toggle/icon-toggle";
+@import "~material-design-lite/src/list/list";
 @import "~material-design-lite/src/menu/menu";
-@import "./progress/progress";// Needed to remove '?embed'
-@import "~material-design-lite/src/layout/layout";
+@import "./progress/progress"; // Needed to remove '?embed'
+@import "./layout/layout"; // Customized
 @import "~material-design-lite/src/radio/radio";
 @import "~material-design-lite/src/slider/slider";
+@import "~material-design-lite/src/snackbar/snackbar";
 @import "~material-design-lite/src/spinner/spinner";
 @import "~material-design-lite/src/switch/switch";
 @import "~material-design-lite/src/tabs/tabs";
@@ -41,3 +41,5 @@
 @import "~material-design-lite/src/tooltip/tooltip";
 @import "~material-design-lite/src/shadow/shadow";
 @import "~material-design-lite/src/grid/grid";
+
+@import "./additions";

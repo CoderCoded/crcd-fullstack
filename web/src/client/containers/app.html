@@ -2,7 +2,7 @@
 <div class="{ appName }-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <header class="{ appName }-header mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Home</span>
+      <span class="mdl-layout-title">{ t(title + '.title') }</span>
       <div class="mdl-layout-spacer"></div>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
         <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
@@ -22,25 +22,26 @@
       </ul>
     </div>
   </header>
-  <div class="{ appName }-drawer mdl-layout__drawer">
+  <div class="{ appName }-drawer mdl-layout__drawer mdl-shadow--6dp">
     <header class="{ appName }-drawer-header">
-      <img src="/images/user.jpg" class="{ appName }-avatar">
+      <img src="/images/person_grey.png" class="{ appName }-avatar">
       <div class="{ appName }-avatar-dropdown">
-        <span>hello@example.com</span>
+        <span class="name">Administrator</span>
         <div class="mdl-layout-spacer"></div>
         <mdl-button id="accbtn" icon="arrow_drop_down">
           <span class="visuallyhidden">Accounts</span>
         </mdl-button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-          <li class="mdl-menu__item">hello@example.com</li>
-          <li class="mdl-menu__item">info@example.com</li>
-          <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
+          <li class="mdl-menu__item" onclick="{ preferences }"><i class="material-icons">settings</i> { t('preferences.title') }</li>
+          <li class="mdl-menu__item" onclick="{ logout }"><i class="material-icons">exit_to_app</i> { t('logout.title') }</li>
         </ul>
       </div>
+      <span class="email">admin@codercoded.com</span>
     </header>
     <navigation></navigation>
   </div>
-  <main class="mdl-layout__content { appName }-content" id="content">
 
+  <loading each="{ loading ? [1] : [] }"></loading>
+  <main class="mdl-layout__content { appName }-content" id="content">
   </main>
 </div>

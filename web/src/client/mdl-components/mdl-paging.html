@@ -1,0 +1,25 @@
+<span class="mdl-paging__page">
+  <span class="mdl-paging__page-label">Page:</span>
+  <span class="mdl-paging__page-value">{ page + 1 }</span>
+  <button id="paging-page" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-paging__page-dropdown">
+    <i class="material-icons">{ opts.pos === 'bottom' ? 'arrow_drop_up' : 'arrow_drop_down' }</i>
+  </button>
+  <ul for="paging-page" class="mdl-menu { mdl-menu--bottom-right: opts.pos === 'top', mdl-menu--top-right: opts.pos === 'bottom' } mdl-js-menu mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events mdl-paging__page">
+    <li each="{ pageOpt in getPages() }" tabindex="-1" class="mdl-menu__item mdl-js-ripple-effect" onclick="{ parent.onSelectPage }">{ pageOpt + 1 }</li>
+  </ul>
+</span>
+<span class="mdl-paging__per-page">
+  <span class="mdl-paging__per-page-label">Rows per page:</span>
+  <span class="mdl-paging__per-page-value">{ pageSize }</span>
+  <button id="paging-per-page" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-paging__per-page-dropdown">
+    <i class="material-icons">{ opts.pos === 'bottom' ? 'arrow_drop_up' : 'arrow_drop_down' }</i>
+  </button>
+  <ul for="paging-per-page" class="mdl-menu { mdl-menu--bottom-right: opts.pos === 'top', mdl-menu--top-right: opts.pos === 'bottom' } mdl-js-menu mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events">
+    <li each="{ size in pageSizes }" tabindex="-1" onclick="{ parent.onSelectPageSize }" class="mdl-menu__item mdl-js-ripple-effect">{ size }</li>
+  </ul>
+</span>
+<span class="mdl-paging__count">{ getFirstItem() }-{ getLastItem() } of { totalItems }</span>
+<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-paging__prev" onclick="{ prev }"><i class="material-icons">keyboard_arrow_left</i>
+</button>
+<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-paging__next" onclick="{ next }"><i class="material-icons">keyboard_arrow_right</i>
+</button>

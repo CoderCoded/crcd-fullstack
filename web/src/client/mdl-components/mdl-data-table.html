@@ -1,0 +1,89 @@
+<table class="mdl-data-table { mdl-data-table--selectable: opts.selectable, mdl-shadow--2dp: opts.shadow, full-width: opts.fullWidth }">
+  <thead if="{ columns }">
+    <tr if="{ opts.title }">
+      <th colspan="{ columns.length + 1 }" class="mdl-data-table__title mdl-data-table__title--with-actions" if="{ rowsSelected.size === 0 }">
+        <mdl-button colored="true" id="addbtn" onclick="{ onAddClick }">{ t('dataTable.add') }</mdl-button>
+      </th>
+      <th colspan="{ columns.length + 1 }" class="mdl-data-table__title mdl-data-table__title--with-selected-actions" if="{ rowsSelected.size > 0 }">
+        <span class="mdl-data-table__title-text">{ rowsSelected.size } { rowsSelected.size === 1 ? t('dataTable.row') : t('dataTable.rows') } { t('dataTable.selected') }</span>
+        <span class="mdl-data-table__title-actions">
+          <mdl-button tooltip="{ t('dataTable.edit') }" id="editbtn" icon="edit" show="{ rowsSelected.size === 1 }" onclick="{ onEditClick }"></mdl-button>
+          <mdl-button tooltip="{ t('dataTable.delete') }" id="deletebtn" icon="delete" onclick="{ onDeleteClick }"></mdl-button>
+        </span>
+      </th>
+    </tr>
+    <tr>
+      <th if="{ opts.selectable }">
+        <label class="mdl-checkbox mdl-data-table__select is-upgraded { is-checked: headerChecked }" for="table-header">
+          <input type="checkbox" id="table-header" class="mdl-checkbox__input" onchange="{ onHeaderCheck }">
+          <span class="mdl-checkbox__focus-helper"></span>
+          <span class="mdl-checkbox__box-outline">
+            <span class="mdl-checkbox__tick-outline"></span>
+          </span>
+        </label>
+      </th>
+      <th each="{ column, i in columns }" class="mdl-data-table__header mdl-data-table__cell--non-numeric { mdl-data-table__header--sorted-ascending: parent.isSortedAsc(i), mdl-data-table__header--sorted-descending: parent.isSortedDesc(i) }" onclick="{ parent.onHeaderClick }">
+        <i class="material-icons { invisible: sortCol !== i }">{ sort === 'asc' ? 'arrow_downward' : 'arrow_upward' }</i> { column.name }
+      </th>
+    </tr>
+  </thead>
+
+  <tfoot if="{ !opts.paging }">
+    <tr>
+      <td colspan="{ columns.length + 1 }"><mdl-paging pos="bottom" total="{ allRows.length }"></mdl-paging></td>
+    </tr>
+  </tfoot>
+
+  <tbody>
+    <tr each="{ row, i in rows }" class="{ is-selected: rowsSelected.has(i) }" onclick="{ parent.onRowSelect }">
+      <td if="{ parent.opts.selectable }">
+        <label class="mdl-checkbox mdl-data-table__select is-upgraded { is-checked: rowsSelected.has(i) }" for="row[{ i }]">
+          <input type="checkbox" class="mdl-checkbox__input" id="row[{ i }]" onchange="{ parent.onRowSelect }">
+          <span class="mdl-checkbox__focus-helper"></span>
+          <span class="mdl-checkbox__box-outline">
+            <span class="mdl-checkbox__tick-outline"></span>
+          </span>
+        </label>
+      </td>
+      <td each="{ key, value in row }" class="mdl-data-table__cell--non-numeric">{ value._isAMomentObject ? value.format(parent.momentFormat || null) : value }</td>
+    </tr>
+  </tbody>
+</table>
+
+<dialog class="mdl-dialog delete-dialog">
+  <div class="mdl-dialog__content">
+    <h4>
+      Delete selected items?
+    </h4>
+  </div>
+  <div class="mdl-dialog__actions">
+    <mdl-button colored="true">Delete</mdl-button>
+    <mdl-button onclick="{ onDeleteDialogCloseClick }">Cancel</mdl-button>
+  </div>
+</dialog>
+
+<dialog class="mdl-dialog edit-dialog">
+  <h4 class="mdl-dialog__title">Edit</h4>
+  <div class="mdl-dialog__content">
+    <p>
+      An edit form will be rendered here.
+    <p>
+  </div>
+  <div class="mdl-dialog__actions">
+    <mdl-button colored="true">Save</mdl-button>
+    <mdl-button onclick="{ onEditDialogCloseClick }">Cancel</mdl-button>
+  </div>
+</dialog>
+
+<dialog class="mdl-dialog add-dialog">
+  <h4 class="mdl-dialog__title">Add new item</h4>
+  <div class="mdl-dialog__content">
+    <p>
+      A create form will be rendered here.
+    <p>
+  </div>
+  <div class="mdl-dialog__actions">
+    <mdl-button colored="true">Add</mdl-button>
+    <mdl-button onclick="{ onAddDialogCloseClick }">Cancel</mdl-button>
+  </div>
+</dialog>

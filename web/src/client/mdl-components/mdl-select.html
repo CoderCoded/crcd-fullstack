@@ -1,0 +1,8 @@
+<input class="mdl-textfield__input" type="text" id="{ opts.selectId }" value="{ selectedItem.translateKey ? t(selectedItem.translateKey) : selectedItem.name }" readonly tabIndex="-1">
+<label for="{ opts.selectId }">
+  <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+</label>
+<label for="{ opts.selectId }" class="mdl-textfield__label"><yield></yield></label>
+<ul for="{ opts.selectId }" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+  <li class="mdl-menu__item" each="{ opts.options }" onclick="{ parent.onSelect }">{ translateKey ? t(translateKey) : name }</li>
+</ul>

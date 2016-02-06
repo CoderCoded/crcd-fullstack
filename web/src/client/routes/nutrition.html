@@ -1,0 +1,14 @@
+<loading show="{ loading }"></loading>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--6-col-desktop" each="{ filter in filters }">
+    <crcd-filter
+      fields="{ parent.columns }"
+      onchange="{ parent.onFilterChange }"
+      state="{ filter }">
+    </crcd-filter>
+  </div>
+  <div class="mdl-cell mdl-cell--12-col">
+    <mdl-data-table selectable="true" shadow="true" columns="{ columns }" rows="{ filteredRows }" full-width="true" title="{ t('nutrition.title') }">
+    </mdl-data-table>
+  </div>
+</div>
