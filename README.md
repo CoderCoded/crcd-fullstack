@@ -5,15 +5,22 @@
 
 WebApp boilerplate with following technologies:
 
-- [Riot](http://riotjs.com/) for client-side views
+- [Babel](http://babeljs.io/) for ES2015 and beyond
+- [Riot](http://riotjs.com/) for client-side views and routing
 - [Webpack](http://webpack.github.io/) for client-side bundles
 - [Redux](https://github.com/rackt/redux) for client-side state
+- [Redux DevTools](https://github.com/gaearon/redux-devtools) for client-side development
 - [Material Design Lite](http://getmdl.io/) for client-side styles
 - [Node-sass](https://github.com/sass/node-sass) for custom MDL build
 - [PostCSS](https://twitter.com/postcss) with [PreCSS](https://jonathantneal.github.io/precss/) for style transforms
-- [Nunjucks](http://mozilla.github.io/nunjucks/) for server-side rendering
+- [bunyan](https://github.com/trentm/node-bunyan) and [browser-bunyan](https://github.com/philmander/browser-bunyan) for logging
+- [i18next](http://i18next.com/) for translations
+- [Moment.js](http://momentjs.com/) for date and time manipulation
+- [Pikaday](https://github.com/dbushell/Pikaday) for date picker
 - [Express](http://expressjs.com/) for server-side app and API
-- [Babel](http://babeljs.io/) for ES2015 and beyond
+- [Nunjucks](http://mozilla.github.io/nunjucks/) for server-side rendering
+- [Passport](http://passportjs.org/) for authentication
+- [Objection.js](http://vincit.github.io/objection.js/) for ORM
 
 We have decided not to use isomorphic rendering since it just makes the app a
 bit too complex.
