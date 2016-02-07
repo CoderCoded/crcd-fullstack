@@ -5,17 +5,23 @@
 
 WebApp boilerplate with following technologies:
 
-- [Riot](http://riotjs.com/) for client-side views
+- [Babel](http://babeljs.io/) for ES2015 and beyond
+- [Riot](http://riotjs.com/) for client-side views and routing
 - [Webpack](http://webpack.github.io/) for client-side bundles
 - [Redux](https://github.com/rackt/redux) for client-side state
+- [Redux DevTools](https://github.com/gaearon/redux-devtools) for client-side development
+- [Pure](http://purecss.io/) for client-side styles
 - [PostCSS](https://twitter.com/postcss) with [PreCSS](https://jonathantneal.github.io/precss/) for style transforms
-- [Nunjucks](http://mozilla.github.io/nunjucks/) for server-side rendering
+- [bunyan](https://github.com/trentm/node-bunyan) and [browser-bunyan](https://github.com/philmander/browser-bunyan) for logging
 - [Express](http://expressjs.com/) for server-side app and API
-- [Babel](http://babeljs.io/) for ES2015 and beyond
-- [Bunyan](https://github.com/trentm/node-bunyan) and [browser-bunyan](https://github.com/philmander/browser-bunyan) for logging
+- [Nunjucks](http://mozilla.github.io/nunjucks/) for server-side rendering
+- [Passport](http://passportjs.org/) for authentication
+- [Objection.js](http://vincit.github.io/objection.js/) for ORM
+
+Check out [mdl](https://github.com/CoderCoded/crcd-fullstack/tree/mdl/) branch for more opinionated client side including [Material Design Lite](https://www.getmdl.io/).
 
 We have decided not to use isomorphic rendering since it just makes the app a
-bit too complex.
+bit too complex. However, we use webpack and code splitting inspired by [this guide by Pete Hunt](https://github.com/petehunt/webpack-howto).
 
 **NOTE:** This is still a work in progress. The `crcd-web` module can already be
 used though.
