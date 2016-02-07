@@ -23,7 +23,7 @@ WebApp boilerplate with following technologies:
 - [Objection.js](http://vincit.github.io/objection.js/) for ORM
 
 We have decided not to use isomorphic rendering since it just makes the app a
-bit too complex.
+bit too complex. However, we use webpack and code splitting inspired by [this guide by Pete Hunt](https://github.com/petehunt/webpack-howto).
 
 **NOTE:** This is still a work in progress. The `crcd-web` module can already be
 used though.
