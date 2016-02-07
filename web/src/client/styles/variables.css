@@ -1,11 +1,13 @@
-@import url(http://fonts.googleapis.com/css?family=Montserrat|Source+Sans+Pro:400,300);
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,700,500,400italic,300italic,300,500italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700,300);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
 /*
 * Typography
 * ======================================================================== */
 
-$font-family-base:      'Source Sans Pro', sans-serif;
-$font-family-menu:      'Source Sans Pro', sans-serif;
+$preferred-font: 'Titillium Web', 'Helvetica', 'Arial', sans-serif !default;
+$performance-font: 'Fira Sans', 'Arial', sans-serif !default;
 
 /*
 * Layout

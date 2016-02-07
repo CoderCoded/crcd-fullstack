@@ -1,24 +1,52 @@
 import { login } from '../redux/modules/auth'
+import '../components/pure-button'
 
-import route from 'riot-route'
 import './login.css'
 import tagHtml from './login.html'
 
 riot.tag('login', tagHtml, function (opts) {
   this.log = log.child({childName: 'route/login'})
   this.mixin('store')
+  this.authState = this.store.getState().auth
+
+  // Object for errors, not rendered yet though
+  this.errors = {}
+
+  this.login = (e) => {
+    e.preventDefault()
+
+    console.log('logging in', this.username, this.password)
+
+    this.store.dispatch(login(this.username.value, this.password.value))
+
+    // Prevent normal submit
+    return false
+  }
 
   this.unsubscribe = this.store.subscribe(() => {
-    this.state = this.store.getState().auth
+    let authState = this.store.getState().auth
 
-    let { user, redirectTo } = this.state
+    if (this.authState !== authState) {
+      this.authState = authState
+      // Check if logged in
+      let { user, redirectTo, loginFailed } = this.authState
 
-    if (user) {
-      route(redirectTo || '/')
-      return
+      console.log('Login auth state', this.authState)
+
+      if (loginFailed) {
+        this.errors.username = 'invalid'
+        this.errors.password = 'invalid'
+        this.update()
+        return
+      }
+
+      if (user) {
+        // route(redirectTo || '/')
+        // Full refresh to fix layout
+        window.location.assign(redirectTo || '/')
+        return
+      }
     }
-
-    this.update()
   })
 
   this.on('mount', () => {
@@ -26,17 +54,15 @@ riot.tag('login', tagHtml, function (opts) {
     this.store.resetReducers()
   })
 
+  this.on('updated', () => {
+  })
+
   this.on('unmount', () => {
     this.log.debug('Unmounted: <login>')
     this.unsubscribe()
   })
-
-  this.login = e => {
-    e.preventDefault()
-    // this.store.dispatch(login(this.username.value, this.password.value))
-    this.store.dispatch(login('demouser', 'demopass'))
-
-    // Prevent normal submit
-    return false
-  }
 })
+
+if (module.hot) {
+  module.hot.accept()
+}

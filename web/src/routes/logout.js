@@ -5,8 +5,6 @@ import { Router } from 'express'
 import { BAD_REQUEST } from 'http-codes'
 // import nonXHR from '../utils/nonXHR'
 
-// import db from 'crcd-db'
-
 const router = new Router()
 
 router.log = log.child({router: 'logout'}, true)

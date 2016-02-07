@@ -6,7 +6,7 @@ var port = parseInt(process.env.PORT, 10) || 3001
 
 module.exports = {
   target: 'web',
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-eval-source-map',
   entry: {
     'login': [
       'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
@@ -15,14 +15,6 @@ module.exports = {
     'main': [
       'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
       './src/client/entries/main.js'
-    ],
-    'objects': [
-      'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
-      './src/client/entries/objects.js'
-    ],
-    'roles': [
-      'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
-      './src/client/entries/roles.js'
     ]
   },
   debug: true,
@@ -50,8 +42,14 @@ module.exports = {
         test: /\.css$/,
         loader: 'style!css!postcss'
       }, {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif)$/i,
         loader: 'url?limit=10000?hash=sha512&digest=hex&name=[hash].[ext]'
+      }, {
+        test: /\.woff(2)?(\?.*)?$/,
+        loader: 'url-loader?limit=10000&minetype=application/font-woff'
+      }, {
+        test: /\.(ttf|eot|svg)(\?.*)?$/,
+        loader: 'file-loader'
       }
     ]
   },
@@ -80,7 +78,8 @@ module.exports = {
 
   ],
   postcss: [
+    require('postcss-import')({ addDependencyTo: webpack }),
     require('precss')(),
-    require('autoprefixer')({browsers: 'last 2 versions'})
+    require('autoprefixer')({ browsers: 'last 2 versions' })
   ]
 }

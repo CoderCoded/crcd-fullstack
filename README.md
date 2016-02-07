@@ -8,11 +8,11 @@ WebApp boilerplate with following technologies:
 - [Riot](http://riotjs.com/) for client-side views
 - [Webpack](http://webpack.github.io/) for client-side bundles
 - [Redux](https://github.com/rackt/redux) for client-side state
-- [Pure.css](http://purecss.io/) for client-side styles
 - [PostCSS](https://twitter.com/postcss) with [PreCSS](https://jonathantneal.github.io/precss/) for style transforms
 - [Nunjucks](http://mozilla.github.io/nunjucks/) for server-side rendering
 - [Express](http://expressjs.com/) for server-side app and API
 - [Babel](http://babeljs.io/) for ES2015 and beyond
+- [Bunyan](https://github.com/trentm/node-bunyan) and [browser-bunyan](https://github.com/philmander/browser-bunyan) for logging
 
 We have decided not to use isomorphic rendering since it just makes the app a
 bit too complex.

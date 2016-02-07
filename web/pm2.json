@@ -1,0 +1,19 @@
+{
+  "apps": [
+    {
+      "name": "crcd-web",
+      "script": "build/app.js",
+      "env": {
+        "NODE_CONFIG_DIR": "./build/config",
+        "NODE_ENV": "production",
+        "HOST": "localhost",
+        "PORT": 8090
+      },
+      "watch": ["build"],
+      "ignore_watch" : ["node_modules"],
+      "watch_options": {
+        "followSymlinks": false
+      }
+    }
+  ]
+}

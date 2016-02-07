@@ -1,50 +1,87 @@
 import 'babel-polyfill'
-import createStore from './redux/createStore'
-import riot from 'riot'
-import route from 'riot-route'
 
 import log from './utils/log'
 global.log = log
 global.APP_NAME = 'crcd'
 
-// TODO: Create a separate module for store
-const store = createStore(window.__data)
+import store from './store'
+import riot from 'riot'
+// import route from 'riot-route'
+import './router'
+import { startLoading, stopLoading } from './redux/modules/app'
+
 riot.mixin('store', { store })
 riot.mixin('appName', { appName: APP_NAME })
 
-import logout from './redux/modules/auth'
-
-import router from './router'
+store.dispatch(startLoading())
 
 let state = store.getState()
+let authState = state.auth
+let prefState = state.preferences
+let appState = state.app
 
 const checkAuth = () => {
   // Normally we have user if user has session
-  if (!state.auth.user) return route('/login')
-  log.debug('User:', state.auth.user.username)
-  // TODO: Request credentials via modal if session is lost?
+  if (!authState.user) {
+    if (appState.path !== 'login' && window.location.pathname !== '/login') {
+      // TODO: Request credentials via modal if session is lost?
+      // return route('/login')
+      window.location.assign('/login')
+    }
+  } else {
+    log.debug('User confirmed:', authState.user.username)
+  }
 }
 
-checkAuth()
+const updateLogLevel = () => {
+  let level = prefState.debug ? 'debug' : 'info'
+  log.info('Updating log level', level)
+  log.level(level)
+}
 
-router.on('logout', () => {
-  store.dispatch(logout())
-})
+const updateTitle = () => {
+  let title = store.getState().app.title
+  document.title = 'Coder Coded - ' + title
+}
 
 // App-wide store listener
-const unsubscribe = store.subscribe(() => {
-  let newState = store.getState()
-  if (state === newState) return
-  state = newState
-  checkAuth()
+var unsubscribe = store.subscribe(async () => {
+  let { auth, preferences, app } = store.getState()
+  if (authState !== auth) {
+    authState = auth
+    checkAuth()
+  }
+
+  if (prefState !== preferences) {
+    let { debug } = preferences
+    if (prefState.debug !== debug) {
+      prefState = preferences
+      updateLogLevel()
+    }
+    prefState = preferences
+  }
+
+  if (appState !== app) {
+    appState = app
+    updateTitle()
+  }
 })
 
-if (__DEVELOPMENT__ && __DEVTOOLS__) {
-  const showDevTools = require('./devTools').showDevTools
-  showDevTools(store)
+const initApp = () => {
+  updateLogLevel()
+
+  checkAuth()
+
+  if (__DEVELOPMENT__ && __DEVTOOLS__) {
+    const showDevTools = require('./devTools').showDevTools
+    showDevTools(store)
+  }
+
+  log.info('App initialized.')
+  store.dispatch(stopLoading())
 }
 
-log.info('App initialized.')
+initApp()
 
 if (module.hot) {
   module.hot.accept()

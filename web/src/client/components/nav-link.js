@@ -1,4 +1,6 @@
 import tagHtml from './nav-link.html'
 
-riot.tag('nav-link', tagHtml, function (opts) {
+const tagAttrs = 'class="{ is-current: opts.isCurrent }"'
+
+riot.tag('nav-link', tagHtml, tagAttrs, function (opts) {
 })

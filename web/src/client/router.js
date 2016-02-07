@@ -1,6 +1,9 @@
 import route from 'riot-route'
-import observable from 'riot-observable'
+// import observable from 'riot-observable'
 import log from './utils/log'
+import store from './store'
+import { locationChange, startLoading, stopLoading } from './redux/modules/app'
+import { logout } from './redux/modules/auth'
 
 route.log = log.child({childName: 'router'})
 
@@ -10,28 +13,21 @@ route.base('/')
 // Create subroute for listening all changes
 const router = route.create()
 
-observable(router)
-
 router((first) => {
-  // Trigger change for nav updates
-  router.current = '/' + first
-  router.trigger('change', router.current)
-})
-
-router('/logout..', () => {
-  route.log.info('Logging out')
-  router.trigger('logout')
+  // Store route in redux
+  store.dispatch(locationChange(first))
 })
 
 const appMountPoint = '#app'
 const contentMountPoint = '#content'
 
-// var mountedTag = null
 var appMounted = false  // Whether app is the 'app' or some common view
 
 const mountApp = () => {
   return new Promise((resolve, reject) => {
-    if (appMounted) return resolve()
+    if (appMounted) {
+      return resolve()
+    }
     require.ensure([], () => {
       require('./containers/app')
       route.log.debug('Mounting: <app>')
@@ -44,7 +40,7 @@ const mountApp = () => {
 
 const appRouter = route.create()
 
-appRouter('/login', () => {
+appRouter('/login..', () => {
   route.log.debug('Route /login')
   require.ensure([], () => {
     require('./routes/login')
@@ -53,33 +49,40 @@ appRouter('/login', () => {
   })
 })
 
-appRouter('/objects..', () => {
-  route.log.debug('Route /objects..')
-  require.ensure([], async () => {
-    require('./routes/objects')
-    await mountApp()
-    route.log.debug('Mounting: <objects>')
-    riot.mount(contentMountPoint, 'objects')
-  })
+appRouter('/logout..', () => {
+  route.log.info('Logging out')
+  store.dispatch(logout())
 })
 
-appRouter('/roles..', () => {
-  route.log.debug('Route /roles..')
+appRouter('/preferences..', () => {
+  route.log.debug('Route /preferences..')
+  store.dispatch(startLoading())
   require.ensure([], async () => {
-    require('./routes/roles')
-    await mountApp()
-    route.log.debug('Mounting: <roles>')
-    riot.mount(contentMountPoint, 'roles')
+    require('./routes/preferences')
+    try {
+      await mountApp()
+    } catch (err) {
+      route.log.error(err)
+    }
+    route.log.debug('Mounting: <preferences>')
+    riot.mount(contentMountPoint, 'preferences')
+    store.dispatch(stopLoading())
   })
 })
 
 appRouter('/', () => {
   route.log.debug('Route /')
+  store.dispatch(startLoading())
   require.ensure([], async () => {
-    require('./routes/main')
-    await mountApp()
-    route.log.debug('Mounting: <main>')
-    riot.mount(contentMountPoint, 'main')
+    require('./routes/dashboard')
+    try {
+      await mountApp()
+    } catch (err) {
+      route.log.error(err)
+    }
+    route.log.debug('Mounting: <dashboard>')
+    riot.mount(contentMountPoint, 'dashboard')
+    store.dispatch(stopLoading())
   })
 })
 
@@ -93,14 +96,19 @@ appRouter('/..', () => {
   })
 })
 
-route.start(true)
-
-export default router
+var unsubscribe = store.subscribe(() => {
+  // Wait for translator
+  if (!store.getState().app.loading) {
+    route.start(true)
+    unsubscribe()
+  }
+})
 
 // check if HMR is enabled
 if (module.hot) {
   module.hot.accept()
   module.hot.dispose(() => {
+    unsubscribe()
     route.stop()
   })
 }
