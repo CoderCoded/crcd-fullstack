@@ -63,9 +63,8 @@ module.exports = {
       'node_modules'
     ],
     extensions: ['', '.json', '.js'],
-    alias: {
-      'i18next': 'i18next/lib/index.js',
-      'i18next-xhr-backend': 'i18next-xhr-backend/lib/index.js'
+    htmlLoader: {
+      ignoreCustomFragments: [/\"?\{.*?\}\"?/]
     }
   },
   plugins: [

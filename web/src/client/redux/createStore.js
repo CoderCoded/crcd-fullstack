@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { apiMiddleware } from 'redux-api-middleware'
-import persistState from 'redux-localstorage'
 import authMiddleware from './middleware/authMiddleware'
 import { apiReqMiddleware, apiResMiddleware } from './middleware/jsonApiMiddleware'
 import thunk from 'redux-thunk'
@@ -25,7 +24,6 @@ export default function createReduxStore (initialState) {
   if (__DEVELOPMENT__ && __DEVTOOLS__) {
     const DevTools = require('../devTools.js').default
     createStoreWithMiddleware = compose(
-      persistState('preferences'),
       applyMiddleware(
         thunk,
         authMiddleware,
@@ -37,7 +35,6 @@ export default function createReduxStore (initialState) {
     )(createStore)
   } else {
     createStoreWithMiddleware = compose(
-      persistState('preferences'),
       applyMiddleware(
         thunk,
         authMiddleware,
