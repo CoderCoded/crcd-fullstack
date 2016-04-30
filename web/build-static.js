@@ -6,8 +6,8 @@ Promise.config({
 })
 const __DEVELOPMENT__ = process.env.NODE_ENV !== 'production'
 const APP_DESC = require('./package.json').description
-import 'babel-polyfill'
 
+import 'babel-polyfill'
 import walk from 'walk'
 import path from 'path'
 
@@ -54,7 +54,7 @@ nunjucksEnv.addGlobal('description', APP_DESC)
 nunjucksEnv.addGlobal('assetsPath', assetsPath)
 nunjucksEnv.addGlobal('__DEVELOPMENT__', __DEVELOPMENT__)
 
-async function fileHandler (root, fileStat, next) {
+function fileHandler (root, fileStat, next) {
   let { name } = fileStat
 
   let inputFile = path.resolve(root, name)
@@ -64,18 +64,22 @@ async function fileHandler (root, fileStat, next) {
   console.log('In: ', inputFile)
   console.log('Out:', outputFile)
 
-  try {
-    await mkdirp(outputPath)
+  return mkdirp(outputPath)
+    .then(function () {
     // await fs.readFileAsync(inputFile)
-    let htmlString = await nunjucks.renderAsync(inputFile)
-    await fs.writeFileAsync(outputFile, htmlString)
-    next()
-  } catch (err) {
-    console.error(err)
-  }
+      return nunjucks.renderAsync(inputFile)
+    })
+    .then(function (htmlString) {
+      fs.writeFileSync(outputFile, htmlString)
+      next()
+    })
+    .catch(function (err) {
+      console.error(err)
+      next(err)
+    })
 }
 
-async function dirHandler (root, dirStat, next) {
+function dirHandler (root, dirStat, next) {
   let { name } = dirStat
 
   // Skip layouts and includes
@@ -88,13 +92,14 @@ async function dirHandler (root, dirStat, next) {
 
   let outputDir = path.resolve(outputPath, root.replace(inputPath, '.'), name)
 
-  try {
-    await mkdirp(outputDir)
-  } catch (err) {
-    console.error(err)
-  }
-
-  next()
+  return mkdirp(outputDir)
+    .then(function () {
+      next()
+    })
+    .catch(function (err) {
+      console.error(err)
+      next(err)
+    })
 }
 
 function errorsHandler (root, nodeStatsArray, next) {
