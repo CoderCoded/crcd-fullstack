@@ -119,4 +119,8 @@ server is started.
   - `static/dist` : Webpack output
 - `.tmp/` : Temp builds in dev mode
 
+#### Screenshots
+
+![image](https://cloud.githubusercontent.com/assets/1150613/14934264/1b4f03ba-0eb4-11e6-9994-272b522c1083.png)
+
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
