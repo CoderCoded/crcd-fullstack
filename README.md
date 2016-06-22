@@ -9,7 +9,6 @@ WebApp boilerplate with following technologies:
 - [Riot](http://riotjs.com/) for client-side views and routing
 - [Webpack](http://webpack.github.io/) for client-side bundles
 - [Redux](https://github.com/rackt/redux) for client-side state
-- [Redux DevTools](https://github.com/gaearon/redux-devtools) for client-side development
 - [Pure](http://purecss.io/) for client-side styles
 - [PostCSS](https://twitter.com/postcss) with [PreCSS](https://jonathantneal.github.io/precss/) for style transforms
 - [bunyan](https://github.com/trentm/node-bunyan) and [browser-bunyan](https://github.com/philmander/browser-bunyan) for logging
