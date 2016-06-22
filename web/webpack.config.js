@@ -71,8 +71,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/\.json$/),
     new webpack.DefinePlugin({
-      __DEVELOPMENT__: true,
-      __DEVTOOLS__: true
+      __DEVELOPMENT__: true
     }),
     new webpack.optimize.CommonsChunkPlugin('commons', 'commons.js')
 

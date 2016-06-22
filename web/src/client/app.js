@@ -72,11 +72,6 @@ const initApp = () => {
 
   checkAuth()
 
-  if (__DEVELOPMENT__ && __DEVTOOLS__) {
-    const showDevTools = require('./devTools').showDevTools
-    showDevTools(store)
-  }
-
   log.info('App initialized.')
   store.dispatch(stopLoading())
 }

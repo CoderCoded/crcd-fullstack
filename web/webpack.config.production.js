@@ -69,8 +69,7 @@ module.exports = {
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin('[name].css'),
     new webpack.DefinePlugin({
-      __DEVELOPMENT__: false,
-      __DEVTOOLS__: false
+      __DEVELOPMENT__: false
     }),
 
     // ignore dev config

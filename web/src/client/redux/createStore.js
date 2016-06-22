@@ -22,31 +22,16 @@ let initialReducers = { auth, app, preferences }
 export default function createReduxStore (initialState) {
   let createStoreWithMiddleware
 
-  if (__DEVELOPMENT__ && __DEVTOOLS__) {
-    const DevTools = require('../devTools.js').default
-    createStoreWithMiddleware = compose(
-      persistState('preferences'),
-      applyMiddleware(
-        thunk,
-        authMiddleware,
-        apiReqMiddleware,
-        apiMiddleware,
-        apiResMiddleware
-      ),
-      DevTools.instrument()
-    )(createStore)
-  } else {
-    createStoreWithMiddleware = compose(
-      persistState('preferences'),
-      applyMiddleware(
-        thunk,
-        authMiddleware,
-        apiReqMiddleware,
-        apiMiddleware,
-        apiResMiddleware
-      )
-    )(createStore)
-  }
+  createStoreWithMiddleware = compose(
+    persistState('preferences'),
+    applyMiddleware(
+      thunk,
+      authMiddleware,
+      apiReqMiddleware,
+      apiMiddleware,
+      apiResMiddleware
+    )
+  )(createStore)
 
   // Don't pass extra data since Redux throws an error, each reducer handles their initialState
   store = createStoreWithMiddleware(combineReducers(initialReducers), {
