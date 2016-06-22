@@ -123,9 +123,25 @@ app.use((err, req, res, next) => {
 })
 
 const port = process.env.PORT || 3000
-server.listen(port, (err) => {
+server.listen(port, function (err) {
   if (err) {
-    log.error(err)
+    log.error({err}, 'Server failed to start.')
   }
+  console.log(`[${new Date().toISOString()}] Server listening on port ${port}`)
   log.info('Server listening on port %s', port)
 })
+
+function gracefulShutdown () {
+  console.log(`[${new Date().toISOString()}] Waiting for all requests to finish...`)
+  log.info('Waiting for all requests to finish...')
+  server.close(function () {
+    console.log(`[${new Date().toISOString()}] Server shutting down...`)
+    log.info('Server shutting down...')
+    process.exit(0)
+  })
+}
+
+if (!__DEVELOPMENT__) {
+  process.on('SIGINT', gracefulShutdown)
+  process.on('SIGTERM', gracefulShutdown)
+}
