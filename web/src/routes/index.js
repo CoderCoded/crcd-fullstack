@@ -25,11 +25,11 @@ if (CONFIG.auth.enabled) {
   }
 }
 
-router.use('/login', require('./routes/login').default)
-router.use('/logout', authn, require('./routes/logout').default)
-router.use('/', authn, require('./routes/main').default)
+router.use('/login', require('./login').default)
+router.use('/logout', authn, require('./logout').default)
+router.use('/', authn, require('./main').default)
 
 // Not found
-router.use('*', require('./routes/not-found').default)
+router.use('*', require('./not-found').default)
 
-export default router
+module.exports = router.default = router

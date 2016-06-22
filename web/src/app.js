@@ -111,7 +111,7 @@ app.use((req, res, next) => {
   next()
 })
 
-if (CONFIG.router.enabled) app.use(require('./router').default)
+if (CONFIG.router.enabled) app.use(require('./routes'))
 
 // Error handler
 app.use((err, req, res, next) => {
