@@ -17,7 +17,7 @@ WebApp boilerplate with following technologies:
 - [Passport](http://passportjs.org/) for authentication
 - [Objection.js](http://vincit.github.io/objection.js/) for ORM
 
-Check out [mdl](https://github.com/CoderCoded/crcd-fullstack/tree/mdl/) branch for more opinionated client side including [Material Design Lite](https://www.getmdl.io/).
+Check out [mdl](https://github.com/CoderCoded/crcd-fullstack/tree/mdl/) branch for more opinionated client side including [Material Design Lite](https://www.getmdl.io/). **NOTE:** Not updated for a while, master is more up to date.
 
 We have decided not to use isomorphic rendering since it just makes the app a
 bit too complex. However, we use webpack and code splitting inspired by [this guide by Pete Hunt](https://github.com/petehunt/webpack-howto).

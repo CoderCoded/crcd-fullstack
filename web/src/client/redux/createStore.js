@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { apiMiddleware } from 'redux-api-middleware'
-import persistState from 'redux-localstorage'
 import authMiddleware from './middleware/authMiddleware'
 import { apiReqMiddleware, apiResMiddleware } from './middleware/jsonApiMiddleware'
 import thunk from 'redux-thunk'
@@ -23,7 +22,6 @@ export default function createReduxStore (initialState) {
   let createStoreWithMiddleware
 
   createStoreWithMiddleware = compose(
-    persistState('preferences'),
     applyMiddleware(
       thunk,
       authMiddleware,

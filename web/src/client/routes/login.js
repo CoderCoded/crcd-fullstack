@@ -15,9 +15,9 @@ riot.tag('login', tagHtml, function (opts) {
   this.login = (e) => {
     e.preventDefault()
 
-    console.log('logging in', this.username, this.password)
+    console.log('logging in', this.refs.username, this.refs.password)
 
-    this.store.dispatch(login(this.username.value, this.password.value))
+    this.store.dispatch(login(this.refs.username.value, this.refs.password.value))
 
     // Prevent normal submit
     return false

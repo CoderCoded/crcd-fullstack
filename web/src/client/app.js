@@ -5,7 +5,7 @@ global.log = log
 global.APP_NAME = 'crcd'
 
 import store from './store'
-import riot from 'riot'
+import * as riot from 'riot'
 // import route from 'riot-route'
 import './router'
 import { startLoading, stopLoading } from './redux/modules/app'
