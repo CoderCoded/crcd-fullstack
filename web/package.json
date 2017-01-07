@@ -22,7 +22,7 @@
   "scripts": {
     "build-static": "node ./node_modules/better-npm-run build-static",
     "build-static-dev": "node ./node_modules/better-npm-run build-static-dev",
-    "build-babel": "babel src --out-dir build --presets es2015-node4,stage-2 --ignore client",
+    "build-babel": "babel src --out-dir build --presets env,stage-2 --ignore client",
     "build-clean": "node ./node_modules/better-npm-run build-clean",
     "build-copy": "node ./node_modules/better-npm-run build-copy",
     "build-webpack": "webpack --verbose --colors --display-error-details --config webpack.config.production.js",
