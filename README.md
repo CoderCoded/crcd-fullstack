@@ -3,6 +3,10 @@
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
+# DEPRECATED!
+
+**This repo should be updated** according to the changes in https://github.com/CoderCoded/crcd-react
+
 WebApp boilerplate with following technologies:
 
 - [Babel](http://babeljs.io/) for ES2015 and beyond
